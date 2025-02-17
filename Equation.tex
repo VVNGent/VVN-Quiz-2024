@@ -1,0 +1,129 @@
+\documentclass[final, 11pt]{article}
+\usepackage[style=ieee]{biblatex}
+\usepackage{physics}
+\usepackage{float}
+\usepackage{multicol}
+\usepackage[justification=centering]{caption}
+\usepackage{subcaption}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{bbold}
+
+
+
+\title{VVN Quiz problem}
+
+
+\begin{document}
+
+% \maketitle
+
+
+\section{Matrix form}
+Equation \ref{MatrixEquation} was proven to be unconditionally stable with V=0, m=0.
+
+\begin{equation}
+    \label{MatrixEquation}
+    \left[M\right]\left[\begin{matrix*}
+        \boldsymbol{a}\vert^{n+1}\\\boldsymbol{d}\vert^{n+1}
+    \end{matrix*}\right] = \left[P\right]\left[\begin{matrix*}
+        \boldsymbol{a}\vert^{n}\\\boldsymbol{d}\vert^{n}
+    \end{matrix*}\right]
+\end{equation}
+
+Where the following are the matrices (with $N_j$, and $N_k$ the dimensions in the $x$- and $y$-direction):
+\begin{flalign}
+    &\left[\begin{matrix*}
+        \boldsymbol{a}^{n}\\\boldsymbol{d}^{n}
+    \end{matrix*}\right] = \left[\begin{smallmatrix*}
+        a\vert^{n}_{1,1}\\\vdots\\a\vert^{n}_{1,N_k}\\a\vert^{n}_{2,1}\\\vdots\\a\vert^{n}_{N_j,N_k}\\\hline
+        d\vert^{n}_{1,1}\\\vdots\\d\vert^{n}_{1,N_k}\\d\vert^{n}_{2,1}\\\vdots\\d\vert^{n}_{N_j,N_k}
+    \end{smallmatrix*}\right],&\begin{split}
+        &\left[M\right] = \frac{2\hbar+i\Delta t\left[\begin{array}{c|c}
+            V & 0 \\\hline
+            0 & V
+        \end{array}\right]}{2\hbar\Delta t}\left[\begin{array}{c|c}
+            T & 0 \\\hline
+            0 & T
+        \end{array}\right] + \frac{imc^2}{2\hbar}\left[\begin{array}{c|c}
+            T & 0 \\\hline
+            0 & -T
+        \end{array}\right]\\ &+\frac{c}{\Delta x}\left[\begin{array}{c|c}
+            0 & X \\\hline
+            X & 0
+        \end{array}\right] - i\frac{c}{\Delta y}\left[\begin{array}{c|c}
+            0 & Y \\\hline
+            -Y & 0
+        \end{array}\right],\\
+        &\left[P\right] = \frac{2\hbar-i\Delta t\left[\begin{array}{c|c}
+            V & 0 \\\hline
+            0 & V
+        \end{array}\right]}{2\hbar\Delta t}\left[\begin{array}{c|c}
+            T & 0 \\\hline
+            0 & T
+        \end{array}\right] -\frac{imc^2}{2\hbar}\left[\begin{array}{c|c}
+            T & 0 \\\hline
+            0 & -T
+        \end{array}\right]\\ &-\frac{c}{\Delta x}\left[\begin{array}{c|c}
+            0 & X \\\hline
+            X & 0
+        \end{array}\right] + i\frac{c}{\Delta y}\left[\begin{array}{c|c}
+            0 & Y \\\hline
+            -Y & 0
+        \end{array}\right]
+    \end{split}&
+\end{flalign}
+
+Where the matrices $T, X, Y$ are defined as 
+follows, with $\alpha$ equal to $1$ if periodic boundary conditions are applied in the 
+$x$-direction, and $\beta$ equals to $1$ if periodic boundary conditions are applied 
+in the $y$-direction, otherwise they are set to $0$:
+
+\begin{flalign}
+    &T = \left[\begin{smallmatrix}
+        \tau & \tau & 0 & \overbrace{\cdots}^{N_j-4} & 0 & \\
+        0 & \tau & \tau & \cdots & 0 & \\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \Big\}N_j-4\\
+        \alpha\tau & 0 & 0 & \cdots & \tau
+    \end{smallmatrix}\right],
+    X = \left[\begin{smallmatrix}
+        \tau & -\tau & 0 & \overbrace{\cdots}^{N_j-4} & 0 & \\
+        0 & \tau & -\tau & \cdots & 0 & \\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \Big\}N_j-4\\
+        -\alpha\tau & 0 & 0 & \cdots & \tau
+    \end{smallmatrix}\right],
+    Y = \left[\begin{smallmatrix}
+        \iota & \iota & 0 & \overbrace{\cdots}^{N_j-4} & 0 & \\
+        0 & \iota & \iota & \cdots & 0 & \\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \Big\}N_j-4\\
+        \alpha\iota & 0 & 0 & \cdots & \iota
+    \end{smallmatrix}\right],\\
+    &\tau = \left[\begin{smallmatrix}
+        1 & 1 & 0 & \overbrace{\cdots}^{N_k-4} & 0 & \\
+        0 & 1 & 1 & \cdots & 0 & \\
+        0 & 0 & 1 & \cdots & 0 & \\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \Big\}N_k-4\\
+        \beta & 0 & 0 & \cdots & 1 &
+    \end{smallmatrix}\right],\,
+    \iota = \left[\begin{smallmatrix}
+        1 & -1 & 0 & \overbrace{\cdots}^{N_k-4} & 0 & \\
+        0 & 1 & -1 & \cdots & 0 & \\
+        0 & 0 & 1 & \cdots & 0 & \\
+        \vdots & \vdots & \vdots & \ddots & \vdots & \Big\}N_k-4\\
+        -\beta & 0 & 0 & \cdots & 1 &
+    \end{smallmatrix}\right],\,V = \left[\begin{smallmatrix}
+        v\vert^n_{1,1} & \cdots & 0\\
+        \vdots & \ddots & \vdots\\
+        0 & \cdots & v\vert^n_{N_j,N_k}
+    \end{smallmatrix}\right]
+\end{flalign}
+
+\section{Problem statement}
+While the matrix defined above is unconditionally stable, with periodic boundary conditions, the implementation of equation \ref{MatrixEquation} is unstable.
+
+\end{document}
