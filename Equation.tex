@@ -16,16 +16,26 @@
 
 
 
-\title{VVN Quiz problem}
+\title{VVN Quiz}
+\date{February 27, 2025}
+\author{Vereniging voor Natuurkunde}
 
 
 \begin{document}
 
-% \maketitle
+\maketitle
 
+\section{Problem statement}
+The matrix equation \ref{MatrixEquation}, is proven to be unconditionally stable given some restrictions, we found however that this does not hold for the implementation.
+\\
+We have narrowed the issue down to the matrix construction code (Matrices.py).
+\\
+It is now up to you to find our error.
+
+\pagebreak
 
 \section{Matrix form}
-Equation \ref{MatrixEquation} was proven to be unconditionally stable with V=0, m=0.
+Equation \ref{MatrixEquation} was proven to be unconditionally stable with \(V=0, m=0, \alpha=\beta=1\) and \( N_j = N_k \in 2\mathbb{N}^{+}+1\).
 
 \begin{equation}
     \label{MatrixEquation}
@@ -53,10 +63,10 @@ Where the following are the matrices (with $N_j$, and $N_k$ the dimensions in th
         \end{array}\right] + \frac{imc^2}{2\hbar}\left[\begin{array}{c|c}
             T & 0 \\\hline
             0 & -T
-        \end{array}\right]\\ &+\frac{c}{\Delta x}\left[\begin{array}{c|c}
+        \end{array}\right]\\ &-\frac{c}{\Delta x}\left[\begin{array}{c|c}
             0 & X \\\hline
             X & 0
-        \end{array}\right] - i\frac{c}{\Delta y}\left[\begin{array}{c|c}
+        \end{array}\right] + i\frac{c}{\Delta y}\left[\begin{array}{c|c}
             0 & Y \\\hline
             -Y & 0
         \end{array}\right],\\
@@ -69,10 +79,10 @@ Where the following are the matrices (with $N_j$, and $N_k$ the dimensions in th
         \end{array}\right] -\frac{imc^2}{2\hbar}\left[\begin{array}{c|c}
             T & 0 \\\hline
             0 & -T
-        \end{array}\right]\\ &-\frac{c}{\Delta x}\left[\begin{array}{c|c}
+        \end{array}\right]\\ &+\frac{c}{\Delta x}\left[\begin{array}{c|c}
             0 & X \\\hline
             X & 0
-        \end{array}\right] + i\frac{c}{\Delta y}\left[\begin{array}{c|c}
+        \end{array}\right] - i\frac{c}{\Delta y}\left[\begin{array}{c|c}
             0 & Y \\\hline
             -Y & 0
         \end{array}\right]
@@ -123,7 +133,5 @@ in the $y$-direction, otherwise they are set to $0$:
     \end{smallmatrix}\right]
 \end{flalign}
 
-\section{Problem statement}
-While the matrix defined above is unconditionally stable, with periodic boundary conditions, the implementation of equation \ref{MatrixEquation} is unstable.
 
 \end{document}

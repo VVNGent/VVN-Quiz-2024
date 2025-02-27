@@ -1,6 +1,5 @@
 import numpy as np
-from scipy.sparse import eye, diags, block_diag, block_array
-import scipy
+from scipy.sparse import diags, block_diag, block_array
 
 
 '''Basic Simulation Matrices'''
